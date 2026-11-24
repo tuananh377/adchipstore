@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChipWorld – Header</title>
+<style>
+:root{--navy:#071426;--cyan:#00B8FF;--white:#F8FAFC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,'Segoe UI',sans-serif;background:var(--navy);color:var(--white)}
+header{display:flex;align-items:center;gap:16px;padding:10px 4%;background:linear-gradient(90deg,#071426,#0b2548);border-bottom:1px solid rgba(0,184,255,.4);flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;color:var(--cyan);text-decoration:none;font-weight:700;font-size:1.25rem}
+.logo svg{width:34px;filter:drop-shadow(0 0 6px var(--cyan))}.logo small{display:block;font-size:.65rem;color:#9fc7e6;font-weight:400}
+nav{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}
+nav a{color:var(--white);text-decoration:none;padding:6px 12px;border-radius:99px;font-size:.88rem;transition:.25s}
+nav a:hover{background:var(--cyan);color:var(--navy);box-shadow:0 0 12px var(--cyan)}
+.tools{display:flex;gap:8px;align-items:center}
+input{padding:7px 14px;border-radius:99px;border:0;width:180px;font:inherit;font-size:.85rem}
+.btn{border:1px solid var(--cyan);background:transparent;color:var(--white);padding:7px 14px;border-radius:99px;cursor:pointer;font:inherit;font-size:.85rem;text-decoration:none}
+.btn:hover{background:var(--cyan);color:var(--navy)}
+#badge{background:var(--cyan);color:var(--navy);border-radius:99px;padding:0 7px;font-weight:700;margin-left:4px}
+@media(max-width:760px){nav{order:3;flex-basis:100%}}
+</style></head><body>
+<header>
+  <a class="logo" href="#" data-go="home"><svg viewBox="0 0 40 40"><rect x="10" y="10" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="16" y="16" width="8" height="8" fill="currentColor"/><path d="M15 4v6M25 4v6M15 30v6M25 30v6M4 15h6M4 25h6M30 15h6M30 25h6" stroke="currentColor" stroke-width="2.5"/></svg><span>ChipWorld<small>Thế giới vi mạch</small></span></a>
+  <nav>
+    <a href="#" data-go="home">Trang chủ</a><a href="#" data-go="store">Cửa hàng</a><a href="#" data-go="advisor">Tư vấn chọn chip</a><a href="#" data-go="knowledge">Kiến thức chip</a>
+  </nav>
+  <form class="tools" id="sf"><input id="q" type="search" placeholder="Tìm chip..." aria-label="Tìm kiếm">
+    <a class="btn" href="#" data-go="cart">🛒 Giỏ hàng<span id="badge">0</span></a></form>
+</header>
+<script>
+/* Cấu hình: đặt địa chỉ trang chứa container.html. Để trống = cùng thư mục (mở file trực tiếp). */
+const CONTAINER_URL='container.html';
+const go=(sec,q)=>{const u=CONTAINER_URL+'?'+new URLSearchParams({s:sec,...(q?{q}:{})});
+  try{(window.top||window).location.href=u}catch{window.open(u,'_blank')}};
+document.querySelectorAll('[data-go]').forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.go)});
+document.getElementById('sf').onsubmit=e=>{e.preventDefault();go('store',document.getElementById('q').value.trim())};
+function badge(){let n=0;try{n=(JSON.parse(localStorage.getItem('cw_cart'))||[]).reduce((s,i)=>s+i.n,0)}catch{}
+  document.getElementById('badge').textContent=n}
+badge();setInterval(badge,1000);addEventListener('storage',badge);
+</script></body></html>

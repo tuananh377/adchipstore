@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChipWorld – Footer</title>
+<style>
+:root{--navy:#071426;--cyan:#00B8FF;--white:#F8FAFC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,'Segoe UI',sans-serif;background:var(--navy);color:#b9d3ea;line-height:1.6}
+footer{padding:36px 5% 18px;border-top:1px solid rgba(0,184,255,.4);background:linear-gradient(180deg,#071426,#050d1a)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:1100px;margin:auto}
+h4{color:var(--cyan);margin-bottom:8px}a{color:#b9d3ea;text-decoration:none;display:block;padding:2px 0}a:hover{color:var(--cyan)}
+form{display:flex;gap:6px;margin-top:6px}input{flex:1;min-width:0;padding:7px 12px;border-radius:99px;border:0;font:inherit}
+button{border:0;border-radius:99px;padding:7px 14px;background:var(--cyan);color:var(--navy);font-weight:700;cursor:pointer}
+#msg{font-size:.85rem;color:var(--cyan);min-height:1.2em;margin-top:4px}
+.copy{text-align:center;font-size:.8rem;margin-top:22px;color:#7f9bb8}
+</style></head><body>
+<footer>
+  <div class="cols">
+    <div><h4>ChipWorld</h4><p>Hiểu công nghệ – Chọn đúng chip – Mua sắm thông minh. Nền tảng kiến thức và mua sắm vi mạch bán dẫn.</p></div>
+    <div><h4>Liên kết</h4><a href="container.html?s=store">Cửa hàng</a><a href="container.html?s=advisor">Tư vấn chọn chip</a><a href="container.html?s=knowledge">Kiến thức chip</a></div>
+    <div><h4>Liên hệ</h4><p>Email: lienhe@chipworld.example<br>Hotline: 0000 000 000<br><small>(thông tin minh họa – thay bằng thông tin thật)</small></p></div>
+    <div><h4>Nhận tin công nghệ</h4><form id="f"><input id="em" type="email" placeholder="Email của bạn" required aria-label="Email"><button>Đăng ký</button></form><div id="msg" role="status"></div></div>
+  </div>
+  <p class="copy">© 2026 ChipWorld – Thế giới vi mạch. Giá và tình trạng hàng trên website là dữ liệu minh họa.</p>
+</footer>
+<script>
+document.getElementById('f').onsubmit=e=>{e.preventDefault();
+  const v=document.getElementById('em').value.trim(),m=document.getElementById('msg');
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){m.textContent='Email không hợp lệ.';return}
+  m.textContent='Cảm ơn bạn! Đã đăng ký: '+v;e.target.reset()};
+</script></body></html>
